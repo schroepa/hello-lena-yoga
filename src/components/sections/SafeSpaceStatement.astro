@@ -1,0 +1,29 @@
+---
+interface Props {
+  statement: string;
+}
+
+const { statement } = Astro.props;
+const lines = statement.split('\n');
+---
+
+<section class="px-6 py-24 sm:py-32">
+  <div class="max-w-6xl mx-auto">
+    <p class="font-heading text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.1] max-w-2xl">
+      {lines.map((line, i) => (
+        <>
+          {i === lines.length - 1
+            ? <span class="relative inline-block">
+                {line}
+                <span
+                  class="absolute bottom-1 left-0 w-full h-[3px] bg-primary rounded-full"
+                  aria-hidden="true"
+                />
+              </span>
+            : <>{line}<br /></>
+          }
+        </>
+      ))}
+    </p>
+  </div>
+</section>
