@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+
+interface Props {
+  lang: 'de' | 'en';
+  title: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { lang, title, ctaLabel, ctaHref } = Astro.props;
+
+const allKurse = await getCollection('kurse');
+const kurse = allKurse
+  .filter(k => k.data.lang === lang && k.data.active)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+---
+
+<section class="px-6 py-16 sm:py-24 bg-muted/40">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex items-end justify-between mb-10">
+      <h2 class="font-heading text-3xl sm:text-4xl font-semibold">{title}</h2>
+      <a href={ctaHref} class="text-sm text-muted-foreground hover:text-foreground transition-colors hidden sm:block">
+        {ctaLabel} →
+      </a>
+    </div>
+
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {kurse.map(kurs => (
+        <Card className="border-border bg-card hover:border-primary/40 transition-colors">
+          <CardHeader>
+            <CardTitle className="font-heading text-xl font-medium">{kurs.data.title}</CardTitle>
+            <CardDescription>{kurs.data.shortDescription}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p class="text-sm text-muted-foreground mb-4">{kurs.data.description}</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-muted-foreground">{kurs.data.duration} min</span>
+              <a
+                href={`/${lang}/angebote/${kurs.id.split('/').pop()?.replace(/\.md$/, '')}`}
+                class="text-xs text-primary hover:underline font-medium"
+              >
+                {lang === 'de' ? 'Mehr erfahren' : 'Learn more'} →
+              </a>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+
+    <div class="mt-8 sm:hidden">
+      <a href={ctaHref} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+        {ctaLabel} →
+      </a>
+    </div>
+  </div>
+</section>
