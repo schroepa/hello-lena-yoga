@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/sections/Hero.astro';
+import SafeSpaceStatement from '../../components/sections/SafeSpaceStatement.astro';
+import CourseTeaser from '../../components/sections/CourseTeaser.astro';
+import BlogTeaser from '../../components/sections/BlogTeaser.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const t = useTranslations('de');
+---
+
+<Base title="Willkommen" description={t('hero.subline')}>
+  <Hero
+    headline={t('hero.headline')}
+    subline={t('hero.subline')}
+    ctaLabel={t('hero.cta')}
+    ctaHref={t('hero.cta.href')}
+  />
+  <SafeSpaceStatement statement={t('safespace.statement')} />
+  <CourseTeaser
+    lang="de"
+    title={t('courses.title')}
+    ctaLabel={t('courses.cta')}
+    ctaHref={t('courses.cta.href')}
+  />
+  <BlogTeaser
+    lang="de"
+    title={t('blog.title')}
+    ctaLabel={t('blog.cta')}
+    ctaHref={t('blog.cta.href')}
+  />
+</Base>
