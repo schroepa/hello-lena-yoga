@@ -1,0 +1,25 @@
+---
+interface Props {
+  lang: 'de' | 'en';
+  imprintLabel: string;
+  privacyLabel: string;
+  tagline: string;
+}
+
+const { lang, imprintLabel, privacyLabel, tagline } = Astro.props;
+---
+
+<footer class="border-t border-border mt-24">
+  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="font-heading text-lg font-medium">Lena Yoga</p>
+    <p class="text-sm text-muted-foreground text-center">{tagline}</p>
+    <nav class="flex items-center gap-5 text-sm text-muted-foreground" aria-label="Footer Navigation">
+      <a href={`/${lang}/impressum`} class="hover:text-foreground transition-colors">
+        {imprintLabel}
+      </a>
+      <a href={`/${lang}/datenschutz`} class="hover:text-foreground transition-colors">
+        {privacyLabel}
+      </a>
+    </nav>
+  </div>
+</footer>
