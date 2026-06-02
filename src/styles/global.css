@@ -113,7 +113,7 @@
 }
 
 /* Breath theme transition */
-html.theme-breath {
+body.theme-breath {
   animation: theme-breath 0.32s ease-in-out;
 }
 

@@ -15,17 +15,16 @@ export function ThemeToggle() {
   function toggle() {
     const next = theme === 'light' ? 'dark' : 'light';
 
-    const html = document.documentElement;
-    html.classList.add('theme-breath');
-    const onEnd = () => {
-      html.classList.remove('theme-breath');
-      html.removeEventListener('animationend', onEnd);
-    };
-    html.addEventListener('animationend', onEnd);
-
-    html.classList.toggle('dark', next === 'dark');
+    document.documentElement.classList.toggle('dark', next === 'dark');
     localStorage.setItem('theme', next);
     setTheme(next);
+
+    document.body.classList.add('theme-breath');
+    const onEnd = () => {
+      document.body.classList.remove('theme-breath');
+      document.body.removeEventListener('animationend', onEnd);
+    };
+    document.body.addEventListener('animationend', onEnd);
   }
 
   if (theme === null) return <div className="w-5 h-5" aria-hidden />;
