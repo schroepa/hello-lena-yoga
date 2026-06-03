@@ -9,15 +9,79 @@ interface Props {
 const { lang, imprintLabel, privacyLabel, tagline } = Astro.props;
 ---
 
-<footer class="border-t border-border mt-24">
-  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <p class="font-heading text-lg font-medium">Lena Yoga</p>
-    <p class="text-sm text-muted-foreground text-center">{tagline}</p>
-    <nav class="flex items-center gap-5 text-sm text-muted-foreground" aria-label="Footer Navigation">
-      <a href={`/${lang}/impressum`} class="hover:text-foreground transition-colors">
+<footer style="margin-top: var(--space-wide); padding-block: var(--space-md); padding-inline: 1.5rem;">
+  <div
+    style="
+      max-width: 88rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    "
+    class="sm:flex-row sm:items-center sm:justify-between"
+  >
+    <p
+      style="
+        font-family: 'Clash Display', sans-serif;
+        font-weight: 700;
+        font-size: var(--text-caption);
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--color-text);
+      "
+    >
+      LENA
+    </p>
+
+    <p
+      style="
+        font-family: 'Clash Display', sans-serif;
+        font-weight: 200;
+        font-size: var(--text-caption);
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--color-muted);
+      "
+    >
+      {tagline}
+    </p>
+
+    <nav
+      style="display: flex; align-items: center; gap: 2rem;"
+      aria-label="Footer Navigation"
+    >
+      <a
+        href={`/${lang}/impressum`}
+        style="
+          font-family: 'Clash Display', sans-serif;
+          font-weight: 200;
+          font-size: var(--text-caption);
+          text-transform: uppercase;
+          letter-spacing: 0.15em;
+          color: var(--color-muted);
+          text-decoration: none;
+          transition: color 200ms var(--ease-out-expo);
+        "
+        onmouseenter="this.style.color='var(--color-text)'"
+        onmouseleave="this.style.color='var(--color-muted)'"
+      >
         {imprintLabel}
       </a>
-      <a href={`/${lang}/datenschutz`} class="hover:text-foreground transition-colors">
+      <a
+        href={`/${lang}/datenschutz`}
+        style="
+          font-family: 'Clash Display', sans-serif;
+          font-weight: 200;
+          font-size: var(--text-caption);
+          text-transform: uppercase;
+          letter-spacing: 0.15em;
+          color: var(--color-muted);
+          text-decoration: none;
+          transition: color 200ms var(--ease-out-expo);
+        "
+        onmouseenter="this.style.color='var(--color-text)'"
+        onmouseleave="this.style.color='var(--color-muted)'"
+      >
         {privacyLabel}
       </a>
     </nav>

@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 interface Props {
   lang: 'de' | 'en';
@@ -16,44 +15,150 @@ const kurse = allKurse
   .filter(k => k.data.lang === lang && k.data.active)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
+
+const [featured, ...rest] = kurse;
 ---
 
-<section class="px-6 py-16 sm:py-24 bg-muted/40">
-  <div class="max-w-6xl mx-auto">
-    <div class="flex items-end justify-between mb-10">
-      <h2 class="font-heading text-3xl sm:text-4xl font-semibold">{title}</h2>
-      <a href={ctaHref} class="text-sm text-muted-foreground hover:text-foreground transition-colors hidden sm:block">
+<section
+  style="
+    padding-block: var(--space-tight);
+    padding-inline: 1.5rem;
+    background: var(--color-surface);
+  "
+>
+  <div style="max-width: 88rem; margin: 0 auto;">
+
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: var(--space-md);">
+      <h2
+        style="
+          font-family: 'Clash Display', sans-serif;
+          font-size: var(--text-sub);
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: -0.02em;
+          color: var(--color-text);
+        "
+      >
+        {title}
+      </h2>
+      <a
+        href={ctaHref}
+        class="hidden sm:inline"
+        style="
+          font-family: 'Clash Display', sans-serif;
+          font-size: var(--text-caption);
+          font-weight: 200;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          color: var(--color-muted);
+          text-decoration: none;
+          transition: color 200ms var(--ease-out-expo);
+        "
+        onmouseenter="this.style.color='var(--color-primary)'"
+        onmouseleave="this.style.color='var(--color-muted)'"
+      >
         {ctaLabel} →
       </a>
     </div>
 
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {kurse.map(kurs => (
-        <Card className="border-border bg-card hover:border-primary/40 transition-colors">
-          <CardHeader>
-            <CardTitle className="font-heading text-xl font-medium">{kurs.data.title}</CardTitle>
-            <CardDescription>{kurs.data.shortDescription}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p class="text-sm text-muted-foreground mb-4">{kurs.data.description}</p>
-            <div class="flex items-center justify-between">
-              <span class="text-xs text-muted-foreground">{kurs.data.duration} min</span>
-              <a
-                href={`/${lang}/angebote/${kurs.id.split('/').pop()?.replace(/\.md$/, '')}`}
-                class="text-xs text-primary hover:underline font-medium"
+    {featured && (
+      <div style="display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--color-border);" class="md:grid-cols-[2fr_1fr]">
+        <a
+          href={`/${lang}/angebote/${featured.id.split('/').pop()?.replace(/\.md$/, '')}`}
+          style="
+            display: block;
+            padding: var(--space-lg);
+            background: var(--color-bg);
+            text-decoration: none;
+            transition: background 200ms var(--ease-out-expo);
+          "
+          onmouseenter="this.style.background='var(--color-surface)'"
+          onmouseleave="this.style.background='var(--color-bg)'"
+        >
+          <span
+            style="
+              display: block;
+              font-family: 'Clash Display', sans-serif;
+              font-size: var(--text-caption);
+              font-weight: 200;
+              text-transform: uppercase;
+              letter-spacing: 0.2em;
+              color: var(--color-primary);
+              margin-bottom: var(--space-sm);
+            "
+          >
+            {featured.data.duration} MIN
+          </span>
+          <h3
+            style="
+              font-family: 'Clash Display', sans-serif;
+              font-size: var(--text-sub);
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: -0.02em;
+              color: var(--color-text);
+              margin-bottom: var(--space-xs);
+            "
+          >
+            {featured.data.title}
+          </h3>
+          <p
+            style="
+              font-family: 'Instrument Serif', serif;
+              font-size: var(--text-body);
+              color: var(--color-muted);
+              max-width: 45ch;
+            "
+          >
+            {featured.data.description}
+          </p>
+        </a>
+
+        <div style="display: flex; flex-direction: column; gap: 1px; background: var(--color-border);">
+          {rest.map(kurs => (
+            <a
+              href={`/${lang}/angebote/${kurs.id.split('/').pop()?.replace(/\.md$/, '')}`}
+              style="
+                display: block;
+                padding: var(--space-md);
+                background: var(--color-bg);
+                text-decoration: none;
+                flex: 1;
+                transition: background 200ms var(--ease-out-expo);
+              "
+              onmouseenter="this.style.background='var(--color-surface)'"
+              onmouseleave="this.style.background='var(--color-bg)'"
+            >
+              <h3
+                style="
+                  font-family: 'Clash Display', sans-serif;
+                  font-size: var(--text-caption);
+                  font-weight: 600;
+                  text-transform: uppercase;
+                  letter-spacing: 0.05em;
+                  color: var(--color-text);
+                  margin-bottom: 0.25rem;
+                "
               >
-                {lang === 'de' ? 'Mehr erfahren' : 'Learn more'} →
-              </a>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+                {kurs.data.title}
+              </h3>
+              <p
+                style="
+                  font-family: 'Instrument Serif', serif;
+                  font-size: var(--text-caption);
+                  color: var(--color-muted);
+                "
+              >
+                {kurs.data.shortDescription}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
 
-    <div class="mt-8 sm:hidden">
-      <a href={ctaHref} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-        {ctaLabel} →
-      </a>
+    <div style="margin-top: var(--space-md);" class="sm:hidden">
+      <a href={ctaHref} class="btn-outline">{ctaLabel}</a>
     </div>
   </div>
 </section>

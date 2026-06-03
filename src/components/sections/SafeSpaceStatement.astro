@@ -7,17 +7,34 @@ const { statement } = Astro.props;
 const lines = statement.split('\n');
 ---
 
-<section class="px-6 py-24 sm:py-32" aria-label="Safe Space Statement">
-  <div class="max-w-6xl mx-auto">
-    <p class="font-heading text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.1] max-w-2xl">
+<section
+  aria-label="Safe Space Statement"
+  style="padding-block: var(--space-wide); padding-inline: 1.5rem;"
+>
+  <div style="max-width: 88rem; margin: 0 auto;">
+    <p
+      style="
+        font-family: 'Instrument Serif', serif;
+        font-size: var(--text-headline);
+        line-height: 1.1;
+        max-width: 20ch;
+        color: var(--color-text);
+      "
+    >
       {lines.map((line, i) => (
         <>
           {i === lines.length - 1
-            ? <span class="relative inline-block">
+            ? <span style="position: relative; display: inline;">
                 {line}
                 <span
-                  class="absolute bottom-1 left-0 w-full h-[3px] bg-primary rounded-full"
                   aria-hidden="true"
+                  style="
+                    display: block;
+                    height: 3px;
+                    background: var(--color-primary);
+                    margin-top: 0.2em;
+                    width: 100%;
+                  "
                 />
               </span>
             : <>{line}<br /></>
