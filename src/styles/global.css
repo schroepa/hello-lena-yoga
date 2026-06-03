@@ -1,129 +1,349 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
-@import "@fontsource-variable/fraunces";
 
-@custom-variant dark (&:is(.dark *));
+/* ─────────────────────────────────────────────────────────
+   FONTS — lokal aus /public/fonts/
+───────────────────────────────────────────────────────── */
 
-@theme inline {
-    --font-heading: 'Fraunces Variable', serif;
-    --font-sans: 'Geist Variable', sans-serif;
-    --color-sidebar-ring: var(--sidebar-ring);
-    --color-sidebar-border: var(--sidebar-border);
-    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-    --color-sidebar-accent: var(--sidebar-accent);
-    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-    --color-sidebar-primary: var(--sidebar-primary);
-    --color-sidebar-foreground: var(--sidebar-foreground);
-    --color-sidebar: var(--sidebar);
-    --color-ring: var(--ring);
-    --color-input: var(--input);
-    --color-border: var(--border);
-    --color-destructive: var(--destructive);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-accent: var(--accent);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-muted: var(--muted);
-    --color-secondary-foreground: var(--secondary-foreground);
-    --color-secondary: var(--secondary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-primary: var(--primary);
-    --color-popover-foreground: var(--popover-foreground);
-    --color-popover: var(--popover);
-    --color-card-foreground: var(--card-foreground);
-    --color-card: var(--card);
-    --color-foreground: var(--foreground);
-    --color-background: var(--background);
-    --radius-sm: calc(var(--radius) * 0.6);
-    --radius-md: calc(var(--radius) * 0.8);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) * 1.4);
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay-Variable.woff2') format('woff2');
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 100%;
 }
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/fonts/InstrumentSerif-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 100%;
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/fonts/InstrumentSerif-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  size-adjust: 100%;
+}
+
+/* ─────────────────────────────────────────────────────────
+   LENA DESIGN TOKENS — Dark Mode Standard
+───────────────────────────────────────────────────────── */
 
 :root {
-    --background: oklch(0.98 0.008 80);
-    --foreground: oklch(0.15 0.01 60);
-    --card: oklch(0.96 0.008 80);
-    --card-foreground: oklch(0.15 0.01 60);
-    --popover: oklch(0.98 0.008 80);
-    --popover-foreground: oklch(0.15 0.01 60);
-    --primary: oklch(0.72 0.20 130);
-    --primary-foreground: oklch(0.15 0.01 60);
-    --secondary: oklch(0.93 0.008 80);
-    --secondary-foreground: oklch(0.15 0.01 60);
-    --muted: oklch(0.93 0.006 80);
-    --muted-foreground: oklch(0.50 0.01 70);
-    --accent: oklch(0.93 0.008 80);
-    --accent-foreground: oklch(0.15 0.01 60);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.88 0.008 80);
-    --input: oklch(0.88 0.008 80);
-    --ring: oklch(0.72 0.20 130);
-    --radius: 0.75rem;
-    --sidebar: oklch(0.96 0.008 80);
-    --sidebar-foreground: oklch(0.15 0.01 60);
-    --sidebar-primary: oklch(0.72 0.20 130);
-    --sidebar-primary-foreground: oklch(0.15 0.01 60);
-    --sidebar-accent: oklch(0.93 0.008 80);
-    --sidebar-accent-foreground: oklch(0.15 0.01 60);
-    --sidebar-border: oklch(0.88 0.008 80);
-    --sidebar-ring: oklch(0.72 0.20 130);
+  --color-bg:        #080808;
+  --color-surface:   #111111;
+  --color-primary:   #FF2D78;
+  --color-secondary: #C8FF00;
+  --color-accent:    #0047FF;
+  --color-text:      #F0EDE8;
+  --color-muted:     #444444;
+  --color-border:    #222222;
 }
 
-.dark {
-    --background: oklch(0.14 0.015 60);
-    --foreground: oklch(0.95 0.008 80);
-    --card: oklch(0.18 0.015 60);
-    --card-foreground: oklch(0.95 0.008 80);
-    --popover: oklch(0.18 0.015 60);
-    --popover-foreground: oklch(0.95 0.008 80);
-    --primary: oklch(0.80 0.22 130);
-    --primary-foreground: oklch(0.10 0.01 60);
-    --secondary: oklch(0.22 0.015 60);
-    --secondary-foreground: oklch(0.95 0.008 80);
-    --muted: oklch(0.22 0.015 60);
-    --muted-foreground: oklch(0.65 0.01 70);
-    --accent: oklch(0.22 0.015 60);
-    --accent-foreground: oklch(0.95 0.008 80);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.80 0.22 130);
-    --sidebar: oklch(0.18 0.015 60);
-    --sidebar-foreground: oklch(0.95 0.008 80);
-    --sidebar-primary: oklch(0.80 0.22 130);
-    --sidebar-primary-foreground: oklch(0.10 0.01 60);
-    --sidebar-accent: oklch(0.22 0.015 60);
-    --sidebar-accent-foreground: oklch(0.95 0.008 80);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.80 0.22 130);
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg:        #F5F0EB;
+    --color-surface:   #FFFFFF;
+    --color-primary:   #E8003D;
+    --color-secondary: #7AAF00;
+    --color-accent:    #0030CC;
+    --color-text:      #0A0A0A;
+    --color-muted:     #888888;
+    --color-border:    #E0DBD5;
+  }
 }
+
+/* ─────────────────────────────────────────────────────────
+   SHADCN OVERRIDES — map shadcn vars → LENA tokens
+───────────────────────────────────────────────────────── */
+
+:root {
+  --background: var(--color-bg);
+  --foreground: var(--color-text);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-text);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-text);
+  --primary: var(--color-primary);
+  --primary-foreground: var(--color-bg);
+  --secondary: var(--color-secondary);
+  --secondary-foreground: var(--color-bg);
+  --muted: var(--color-surface);
+  --muted-foreground: var(--color-muted);
+  --accent: var(--color-accent);
+  --accent-foreground: var(--color-bg);
+  --destructive: #FF4444;
+  --border: var(--color-border);
+  --input: var(--color-border);
+  --ring: var(--color-primary);
+  --radius: 0;
+  --sidebar: var(--color-surface);
+  --sidebar-foreground: var(--color-text);
+  --sidebar-primary: var(--color-primary);
+  --sidebar-primary-foreground: var(--color-bg);
+  --sidebar-accent: var(--color-surface);
+  --sidebar-accent-foreground: var(--color-text);
+  --sidebar-border: var(--color-border);
+  --sidebar-ring: var(--color-primary);
+}
+
+/* ─────────────────────────────────────────────────────────
+   TAILWIND v4 THEME — utility classes from LENA tokens
+───────────────────────────────────────────────────────── */
+
+@theme inline {
+  --font-display: 'Clash Display', sans-serif;
+  --font-body: 'Instrument Serif', serif;
+  --color-bg:        var(--color-bg);
+  --color-surface:   var(--color-surface);
+  --color-primary:   var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent:    var(--color-accent);
+  --color-copy:      var(--color-text);
+  --color-muted:     var(--color-muted);
+  --color-border:    var(--color-border);
+}
+
+/* ─────────────────────────────────────────────────────────
+   FLUID TYPESCALE
+───────────────────────────────────────────────────────── */
+
+:root {
+  --text-display:  clamp(3.5rem, 12vw, 14rem);
+  --text-headline: clamp(2.5rem, 7vw, 8rem);
+  --text-sub:      clamp(1.5rem, 4vw, 4rem);
+  --text-body:     clamp(1rem, 1.5vw, 1.25rem);
+  --text-caption:  clamp(0.75rem, 1vw, 0.875rem);
+  --text-sidebar:  clamp(0.625rem, 0.8vw, 0.75rem);
+}
+
+/* ─────────────────────────────────────────────────────────
+   SPACING — rhythmisch wechselnd
+───────────────────────────────────────────────────────── */
+
+:root {
+  --space-tight: clamp(2rem, 5vw, 4rem);
+  --space-wide:  clamp(5rem, 12vw, 12rem);
+  --space-xs:    clamp(0.5rem, 1vw, 0.75rem);
+  --space-sm:    clamp(0.75rem, 1.5vw, 1rem);
+  --space-md:    clamp(1rem, 2.5vw, 1.5rem);
+  --space-lg:    clamp(1.5rem, 4vw, 3rem);
+  --space-xl:    clamp(2.5rem, 6vw, 5rem);
+}
+
+/* ─────────────────────────────────────────────────────────
+   EASING & ANIMATION
+───────────────────────────────────────────────────────── */
+
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─────────────────────────────────────────────────────────
+   BASE LAYER
+───────────────────────────────────────────────────────── */
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
+    box-sizing: border-box;
   }
   html {
-    @apply font-sans;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Instrument Serif', serif;
+    font-size: var(--text-body);
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Clash Display', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
   }
 }
 
-/* Breath theme transition */
-body.theme-breath {
-  animation: theme-breath 0.32s ease-in-out;
+/* ─────────────────────────────────────────────────────────
+   TEXT MASKING — Signature-Element
+───────────────────────────────────────────────────────── */
+
+.text-mask {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-@keyframes theme-breath {
-  0%   { opacity: 1; transform: scale(1); }
-  40%  { opacity: 0.82; transform: scale(0.9985); }
-  100% { opacity: 1; transform: scale(1); }
+.text-reveal {
+  clip-path: inset(0 100% 0 0);
+  animation: reveal 1000ms var(--ease-out-expo) forwards;
 }
 
-/* Smooth color transitions */
-html {
-  transition: background-color 0.32s ease, color 0.32s ease;
+@keyframes reveal {
+  to { clip-path: inset(0 0% 0 0); }
+}
+
+/* ─────────────────────────────────────────────────────────
+   REVEAL ANIMATIONS
+───────────────────────────────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  scale: 0.98;
+  transition: opacity 800ms var(--ease-out-expo),
+              scale 800ms var(--ease-out-expo);
+}
+
+.reveal.visible {
+  opacity: 1;
+  scale: 1;
+}
+
+.reveal-group > * {
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out-expo);
+}
+.reveal-group > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-group > *:nth-child(2) { transition-delay: 80ms; }
+.reveal-group > *:nth-child(3) { transition-delay: 160ms; }
+.reveal-group > *:nth-child(4) { transition-delay: 240ms; }
+
+/* ─────────────────────────────────────────────────────────
+   BUTTONS
+───────────────────────────────────────────────────────── */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  background: var(--color-primary);
+  color: var(--color-bg);
+  border-radius: 0;
+  padding: var(--space-sm) var(--space-lg);
+  font-family: 'Clash Display', sans-serif;
+  font-weight: 600;
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: all 300ms var(--ease-out-expo);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 24px var(--color-primary),
+              0 0 48px color-mix(in srgb, var(--color-primary) 40%, transparent);
+}
+
+@media (prefers-color-scheme: light) {
+  .btn-primary:hover {
+    box-shadow: 4px 4px 0px var(--color-text);
+  }
+}
+
+.btn-primary:active {
+  scale: 0.97;
+  opacity: 0.85;
+  transition-duration: 100ms;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  background: transparent;
+  border: 1.5px solid var(--color-primary);
+  color: var(--color-primary);
+  border-radius: 0;
+  padding: var(--space-sm) var(--space-lg);
+  font-family: 'Clash Display', sans-serif;
+  font-weight: 600;
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: all 300ms var(--ease-out-expo);
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  border-radius: 9999px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   SHADCN COMPONENT OVERRIDES
+───────────────────────────────────────────────────────── */
+
+input, textarea, [cmdk-input] {
+  border: none !important;
+  border-bottom: 1.5px solid var(--color-border) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--color-text) !important;
+  transition: border-color 200ms var(--ease-out-expo);
+}
+input:focus, textarea:focus {
+  border-bottom-color: var(--color-primary) !important;
+  box-shadow: 0 2px 0 var(--color-primary) !important;
+  outline: none !important;
+}
+
+[data-slot="card"] {
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 0 !important;
+}
+
+button[data-slot="button"] {
+  border-radius: 0 !important;
+}
+
+[data-slot="sheet-overlay"],
+[data-slot="dialog-overlay"] {
+  background: rgba(0, 0, 0, 0.92) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* ─────────────────────────────────────────────────────────
+   NOISE TEXTURE UTILITY
+───────────────────────────────────────────────────────── */
+
+.noise {
+  position: relative;
+}
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─────────────────────────────────────────────────────────
+   PREFERS-REDUCED-MOTION — immer
+───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
