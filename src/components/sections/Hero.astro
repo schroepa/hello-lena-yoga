@@ -1,32 +1,95 @@
 ---
 interface Props {
   headline: string;
-  subline: string;
+  label: string;
   ctaLabel: string;
   ctaHref: string;
 }
 
-const { headline, subline, ctaLabel, ctaHref } = Astro.props;
+const { headline, label, ctaLabel, ctaHref } = Astro.props;
+const headlineLines = headline.split('\n');
 ---
 
-<section class="min-h-svh flex items-center justify-start px-6 pt-20">
-  <div class="max-w-6xl mx-auto w-full">
-    <div class="max-w-3xl">
-      <h1 class="font-heading text-6xl sm:text-7xl lg:text-8xl font-semibold leading-[1.05] tracking-tight mb-8">
-        {headline}
-      </h1>
-      <p class="text-lg sm:text-xl text-muted-foreground mb-10 leading-relaxed max-w-md">
-        {subline}
-      </p>
-      <a
-        href={ctaHref}
-        class="inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 rounded-full text-sm font-medium hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      >
-        {ctaLabel}
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
-          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
+<section
+  class="noise"
+  style="
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    padding-top: var(--space-wide);
+    padding-bottom: var(--space-lg);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    overflow: hidden;
+  "
+  data-theme-section
+>
+  <!-- Vertikaler Label-Text links -->
+  <span
+    aria-hidden="true"
+    style="
+      position: absolute;
+      left: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      transform-origin: center;
+      font-family: 'Clash Display', sans-serif;
+      font-weight: 200;
+      font-size: var(--text-sidebar);
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--color-muted);
+      white-space: nowrap;
+    "
+  >
+    {label}
+  </span>
+
+  <!-- Dekoratives Outline-Element — Magenta-Kreis -->
+  <div
+    aria-hidden="true"
+    style="
+      position: absolute;
+      top: -8vw;
+      right: -8vw;
+      width: clamp(14rem, 40vw, 36rem);
+      height: clamp(14rem, 40vw, 36rem);
+      border: 1.5px solid var(--color-primary);
+      border-radius: 50%;
+      opacity: 0.35;
+    "
+  />
+
+  <!-- Hauptinhalt -->
+  <div style="width: 100%; max-width: 88rem; margin: 0 auto; padding-left: 2.5rem;">
+    <h1
+      style="
+        font-family: 'Clash Display', sans-serif;
+        font-weight: 700;
+        font-size: var(--text-display);
+        text-transform: uppercase;
+        line-height: 0.92;
+        letter-spacing: -0.03em;
+        color: var(--color-text);
+        margin-bottom: var(--space-lg);
+      "
+    >
+      {headlineLines.map((line, i) => (
+        <span style="display: block;">
+          {i === 1
+            ? <span class="text-mask">{line}</span>
+            : line
+          }
+        </span>
+      ))}
+    </h1>
+
+    <a href={ctaHref} class="btn-primary">
+      {ctaLabel}
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
+        <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
   </div>
 </section>
