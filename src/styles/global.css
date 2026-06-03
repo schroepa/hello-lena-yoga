@@ -46,6 +46,7 @@
   --color-text:      #F0EDE8;
   --color-muted:     #444444;
   --color-border:    #222222;
+  --color-error:     #FF4444;
 }
 
 @media (prefers-color-scheme: light) {
@@ -58,6 +59,7 @@
     --color-text:      #0A0A0A;
     --color-muted:     #888888;
     --color-border:    #E0DBD5;
+    --color-error:     #FF4444;
   }
 }
 
@@ -80,7 +82,7 @@
   --muted-foreground: var(--color-muted);
   --accent: var(--color-accent);
   --accent-foreground: var(--color-bg);
-  --destructive: #FF4444;
+  --destructive: var(--color-error);
   --border: var(--color-border);
   --input: var(--color-border);
   --ring: var(--color-primary);

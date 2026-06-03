@@ -149,7 +149,7 @@ export function Header({ currentLang, otherLangHref, otherLangLabel, otherLangAr
         style={{
           position: 'fixed',
           inset: 0,
-          zIndex: 40,
+          zIndex: 60,
           background: 'var(--color-bg)',
           display: 'flex',
           flexDirection: 'column',
