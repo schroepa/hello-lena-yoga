@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { ThemeToggle } from './ThemeToggle';
 
 interface NavItem {
   href: string;
@@ -59,12 +58,10 @@ export function Header({ currentLang, otherLangHref, otherLangLabel, otherLangAr
           >
             {otherLangLabel}
           </a>
-          <ThemeToggle />
         </nav>
 
         {/* Mobile navigation */}
         <div className="flex md:hidden items-center gap-2">
-          <ThemeToggle />
           <Sheet>
             <SheetTrigger asChild>
               <button

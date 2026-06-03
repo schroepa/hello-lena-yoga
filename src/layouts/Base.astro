@@ -23,7 +23,7 @@ const nav = [
 ---
 
 <!DOCTYPE html>
-<html lang={lang} class="scroll-smooth">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,15 +32,14 @@ const nav = [
     <meta name="generator" content={Astro.generator} />
     <title>{title} · Lena Yoga</title>
     <meta name="description" content={description} />
-    <script is:inline>
-      (function () {
-        const stored = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (stored === 'dark' || (!stored && prefersDark)) {
-          document.documentElement.classList.add('dark');
-        }
-      })();
-    </script>
+
+    <!-- Font preloads — kritisch für LCP / CLS -->
+    <link rel="preload" href="/fonts/ClashDisplay-Variable.woff2"
+          as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/InstrumentSerif-Regular.woff2"
+          as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/InstrumentSerif-Italic.woff2"
+          as="font" type="font/woff2" crossorigin />
   </head>
   <body>
     <Header
